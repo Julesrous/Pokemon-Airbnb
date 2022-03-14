@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+  </head>
+
+  <body>
+    <div class="navbar navbar-light bg-light px-5">
+      <span class="navbar-brand mb-0 logo">PokAibnb</span>
+          <% if user_signed_in? %>
+            <%= link_to "Home", "/", class: "home"%>
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="dropdown-indication fas fa-align-justify"></i>
+                <%= cl_image_tag current_user.photo.key, height: 50, width: 50, crop: :fill, :radius=>"max" %>
+              </a>
+              <div class="dropdown-menu">
+              <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </div>
+          <% else %>
+          <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle menu-logout" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="dropdown-indication fas fa-align-justify"></i>
+                <div class="poke"></div>
+              </a>
+              <div class="dropdown-menu">
+                <%= link_to "Login", new_user_session_path, class: "dropdown-item"%>
+                <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item"%>
+              </div>
+            </div>
+          <%end%>
+        
+        
+    </span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+<%= simple_form_for(@pokemon) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :nature %>
+  <%= f.input :power %>
+  <%= f.input :level %>
+  <%= f.input :photo, as: :file %>
+  <%= f.input :description %>
+  <%= f.submit %>
+<% end %>
