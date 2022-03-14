@@ -14,7 +14,7 @@
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="dropdown-indication fas fa-align-justify"></i>
-                <%= cl_image_tag current_user.photo.key, height: 50, width: 50, crop: :fill, :radius=>"max" %>
+                <%= cl_image_tag current_user.photo.key, height: 50, width: 50, crop: :fill, :radius=>"max" if current_user.photo.attached? %>
               </a>
               <div class="dropdown-menu">
               <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
