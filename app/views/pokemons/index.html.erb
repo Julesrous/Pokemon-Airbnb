@@ -7,35 +7,37 @@
   </head>
   <body>
     <%recent_pok = @pokemons[0]%>
-    <%@pokemons.each do |pokemon|%>
-       <%if pokemon.user != current_user%>
-        <%if recent_pok.created_at < pokemon.created_at%>            <%recent_pok = pokemon%>
+    <%if @pokemons.any?%>
+      <%@pokemons.each do |pokemon|%>
+        <%if pokemon.user != current_user%>
+          <%if recent_pok.created_at < pokemon.created_at%>      
+            <%recent_pok = pokemon%>
           <%end%>
-       <%end%>
-    <%end%>
-    <div class="nouveauté-pok">
-      <h2><strong>New: <%= distance_of_time_in_words_to_now(recent_pok.created_at) %> ago </strong></h2>
-      <div class="info-nouveauté-pok">
-        <div>
-          <%= cl_image_tag recent_pok.photo.key, height: 500, width: 800, crop: :limit %>
-        </div>
-        <div class="specific-info-nouveauté-pok">
-          <div class="name-new-pokemon">
-            <%=recent_pok.name%>
-          </div>
+        <%end%>
+      <%end%>
+      <div class="nouveauté-pok">
+        <h2><strong>New: <%= distance_of_time_in_words_to_now(recent_pok.created_at) %> ago </strong></h2>
+        <div class="info-nouveauté-pok">
           <div>
-            <p>Nature: <%=recent_pok.nature%> Level: <%=recent_pok.level%></p>
+            <%= cl_image_tag recent_pok.photo.key, height: 500, width: 800, crop: :limit %>
           </div>
-          <div>
-            <%= cl_image_tag recent_pok.user.photo.key, height: 50, width: 50, class: "avatar" %>
-          </div>
-          <div>
-            <%=link_to "Know more about #{recent_pok.name}?", pokemon_path(recent_pok), class: "btn btn-link button-new-pok"%>
+          <div class="specific-info-nouveauté-pok">
+            <div class="name-new-pokemon">
+              <%=recent_pok.name%>
+            </div>
+            <div>
+              <p>Nature: <%=recent_pok.nature%> Level: <%=recent_pok.level%></p>
+            </div>
+            <div>
+              <%= cl_image_tag recent_pok.user.photo.key, height: 50, width: 50, class: "avatar" %>
+            </div>
+            <div>
+              <%=link_to "Know more about #{recent_pok.name}?", pokemon_path(recent_pok), class: "btn btn-link button-new-pok"%>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
+    <%end%>
     <div class="filter-by-regions">
       <h2>Vous recherchez dans une région particulière?</h2>
       <div data-controller="pokregion">
