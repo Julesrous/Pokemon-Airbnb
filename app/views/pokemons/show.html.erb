@@ -1,2 +1,2 @@
 <h1><%=@pokemon.name%></h1>
- <%= cl_image_tag @pokemon.photo.key, height: 300, width: 400, crop: :limit %>
+ <%= cl_image_tag @pokemon.photo.key, height: 300, width: 400, crop: :limit if @pokemon.photo.attached?%>
