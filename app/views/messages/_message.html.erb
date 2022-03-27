@@ -1,0 +1,19 @@
+<div class=messages-user>
+  <%if message.user == current_user%>
+    <div class="message-current-user">
+      <small>
+        <strong><%= message.user.first_name %></strong>
+        <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+      </small>
+      <p><%= message.content %></p>
+    </div>
+    <%else%>
+      <div class="message-other-user">
+        <small>
+          <strong><%= message.user.first_name %></strong>
+          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= message.content %></p>
+      </div>
+    <% end %>
+</div>

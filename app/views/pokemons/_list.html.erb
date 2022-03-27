@@ -1,0 +1,179 @@
+<div data-refresh-list-target="list">
+  <% if @searchPok.present?%>
+    <div class="all-pokemons-search">
+      <%@searchPok.each do |pokemon|%>
+        <div class="pokemon">
+          <%if pokemon.power.downcase == "eau"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-eau">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached? %>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "acier"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-acier">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached? %>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "combat"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-combat">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "dragon"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-dragon">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "électrique"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-electricité">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "électricité"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-electricité">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "feu"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-feu">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "glace"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-glace">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>          
+          <%elsif pokemon.power.downcase == "insecte"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-insecte">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "normal"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-normal">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                   <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "plante"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-plante">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "psy"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-psy">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%elsif pokemon.power.downcase == "roche"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-roche">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%else pokemon.power.downcase == "vol"%>
+            <%= link_to pokemon_path(pokemon), data: { turbolinks: false } do %>
+              <div class="pokemon-vol">
+                <%= cl_image_tag pokemon.photo.key, height: 250, width: 300, crop: :limit if pokemon.photo.attached?%>
+                <div class="pokemon-name">
+                  <%=pokemon.name%>
+                </div>
+                <div>
+                  <p><%=pokemon.nature.capitalize%> / N.<%=pokemon.level%>
+                </div>
+              </div>
+            <%end%>
+          <%end%>
+        </div>
+      <%end%>
+    </div>
+  <%end%>
+</div>

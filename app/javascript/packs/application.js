@@ -15,4 +15,12 @@ ActiveStorage.start()
 import "controllers"
 import "bootstrap"
 
+import { initFlatpickr } from "../plugins/flatpickr";
+
+initFlatpickr();
+
+import { initStarRating } from '../plugins/init_star_rating';
+
+initStarRating();
+
 console.log("Hello from app/javascript/packs/application.js!");

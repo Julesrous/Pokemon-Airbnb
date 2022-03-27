@@ -1,0 +1,162 @@
+.card-pokemon-map-rent-info{
+  display: flex;
+}
+
+.card-pokemon{
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 20px;
+  box-shadow: 1px 2px 10px hsl(203, 6%, 73%);
+  background-color: white;
+  width: 50vw;
+  h1{
+    font-weight: bold;
+  }
+  .btn{
+    background-color: #ffcb03;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .btn:hover{
+    background-color: #e8b500;
+  }
+}
+
+.info-pokemon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+  margin-top: 40px;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #DFDFDF;
+  .avatar{
+    margin-bottom: 0px;
+  }
+}
+
+.card-pokemon .pokemon-image{
+   padding-right: 50px;
+ }
+
+.rent_total_price .integer{
+  display: none;
+}
+
+.mapboxgl-canvas{
+  border-radius: 20px;
+}
+
+.rent-info{
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 1px 2px 10px hsl(203, 6%, 73%);
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  .datepicker{
+    background-color: white;
+    width: 280px;
+  }
+  .button-div{
+    display: flex;
+    justify-content: center;
+  }
+  .btn{
+    margin-top: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    background-color: #ffcb03;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .btn:hover{
+    background-color: #e8b500;
+  }
+  .price-printed{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    font-weight: bold;
+  }
+}
+
+.contact-user{
+  margin-top: 50px;
+}
+
+.map-rent-info{
+  margin-top: 20px;
+  margin-right: 50px;
+  h3{
+    font-size: 25px;
+    font-weight: bold;
+  }
+}
+
+.pokemon-reviews{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  border-top: solid;
+  border-width: 1px;
+  border-color: #DFDFDF;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  height: 300px;
+  .pokemon-reviews-info{
+    width: 500px;
+    overflow: scroll;
+    .pokemon-review{
+      border-bottom: solid;
+      border-width: 1px;
+      border-color: #DFDFDF;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      small{
+        color: #A0A6AB
+      }
+    }
+    .star{
+      color: #fede01;
+    }
+  }
+  .form-pokemon-review{
+    background-color: white;
+    padding: 20px;
+    margin-left: 20px;
+    .form-control{
+      background-color: white;
+      width: 400px;
+      height: 50px;
+    }
+    h3{
+      font-size: 25px;
+    }
+    .btn{
+      background-color: #ffcb03;
+      border-radius: 5px;
+      border: none;
+    }
+    .btn:hover{
+      background-color: #e8b500;
+    }
+    .review_pokemon_rating{
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+  }
+}

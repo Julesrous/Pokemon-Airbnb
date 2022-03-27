@@ -1,0 +1,14 @@
+<%@chatrooms_user.each do |chatroom|%>
+  <div>
+    <%user1 = nil%>
+    <%user2 = nil%>
+    <%chatroom.users.each do |user|%>
+      <%if user == current_user%>
+        <%user1= user%>
+      <%else%>
+        <%user2= user%>
+      <%end%>
+    <%end%>
+    <%=link_to "Discussion with #{user2.first_name}", chatroom_path(chatroom)%>
+  <div>
+<%end%>

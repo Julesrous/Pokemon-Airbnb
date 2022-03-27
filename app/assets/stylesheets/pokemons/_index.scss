@@ -308,3 +308,49 @@
   padding-left:20px;
   padding-right:20px;
 }
+
+.all-pokemons-search{
+  display: flex;
+  max-width: 100vw;
+  margin: 10px;
+  padding: 10px;
+  overflow: scroll;
+  a{
+    color:black;
+    text-decoration: none;
+  }
+}
+
+.search-pokemon{
+  margin: 30px;
+}
+
+.index-container{
+  overflow: hidden;
+}
+
+.search-form{
+  display:flex;
+  margin-top: 20px;
+  justify-content: center;
+  text-align: center;
+}
+
+.search-form .btn{
+  background-color: #ffcb03;
+  border: none;
+  border-radius: 0px 20px 20px 0px;
+  position: relative;
+  right: 78px;
+  padding-bottom: 8px;
+}
+
+.search-form .form-control{
+  width: 800px;
+  border-radius: 20px;
+}
+
+.search-form .form-control:focus{
+  border-color: #106dae;
+  box-shadow: 0px 0px 10px #106dae;
+}

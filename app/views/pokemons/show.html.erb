@@ -1,2 +1,112 @@
-<h1><%=@pokemon.name%></h1>
- <%= cl_image_tag @pokemon.photo.key, height: 300, width: 400, crop: :limit if @pokemon.photo.attached?%>
+<html>
+  <head>
+   <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="card-pokemon-map-rent-info">
+      <div class="card-pokemon">
+        <h1><%=@pokemon.name%></h1>
+        <h3>Price per week: <%=@pokemon.price_per_week%>€</h3>
+        <div class="info-pokemon">
+          <div class="pokemon-image">
+            <%= cl_image_tag @pokemon.photo.key, height: 300, width: 400, crop: :limit if @pokemon.photo.attached?%>
+          </div>
+          <div class="detailled-info-pokemon">
+            <p> Nature: <%=@pokemon.nature%></p>
+            <p> Power: <%=@pokemon.power%></p>
+            <p> Level: <%=@pokemon.level%></p>
+            <p> <i class="fas fa-quote-left"></i> <%=@pokemon.description%></p>
+            <%= link_to user_path(@pokemon.user) do %>
+              <%=cl_image_tag @pokemon.user.photo.key, height: 50, width: 50, class: "avatar" if @pokemon.user.photo.attached? %>
+            <%end%>
+          </div>
+        </div>
+        <div class="contact-user">
+          <%if current_user != @pokemon.user%>
+            <p> Want to know more about <%=@pokemon.name%>? </p>
+            <%if @chatroomCurrentUser.nil?%>
+              <%= simple_form_for [@pokemon, @chatroom] do |f| %>
+                <%= f.submit "Contact #{@pokemon.user.first_name}", class: "btn btn-primary" %>
+              <% end %>
+            <%else%>
+              <%=link_to  "Contact #{@pokemon.user.first_name}", chatroom_path(@chatroomCurrentUser), class: "btn btn-primary"%>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+      <div class="map-rent-info">
+        <h3>Où se situe <%= @pokemon.name%>?</h3>
+        <div class="map-pokemon" style="width: 600px; height: 400px;"
+          data-controller="mapbox"
+          data-mapbox-marker-value="<%= @marker.to_json %>"
+          data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        <div class="rent-info" data-controller="price-rent">
+            <div class="d-none">
+              <%= simple_form_for :search, method: "get" do |f| %>
+                <%= f.input :price_pokemon, input_html: {value: "#{@pokemon.price_per_week}", data: {"price-rent-target": "priceOfPokemon"}}%>
+              <%end %>
+            </div>
+            <h3>Ajoutez des dates pour voir les disponibilités</h3>
+            <%= simple_form_for [@pokemon, @rent] do |f| %>
+              <div class="d-flex">
+                <%= f.input :start_time, as: :string, required: false, input_html: {class: "datepicker", data: {"action": "input->price-rent#setPriceOfRent", "price-rent-target": "firstInput"}}%>
+                <%= f.input :end_time, as: :string, required: false, input_html: {class: "datepicker", id: "secondRangeInput",  data: {"price-rent-target": "secondInput"}} %>
+              </div>
+              <%= f.input :total_price, input_html: {class: "d-none", data: {"price-rent-target": "priceInput"}} %>
+              <div class="price-printed" data-price-rent-target="pricePrinted"></div>
+              <div class="button-div">
+                <%= f.button :submit, "Louer", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pokemon-reviews">
+      <div class="pokemon-reviews-info">
+        <h2>Reviews</h2>
+        <% @pokemon.review_pokemons.each do |review|%>
+          <div class="pokemon-review">
+            <div>
+              <strong><%=review.user.first_name%></strong>
+            </div>
+            <div>
+              <% if review.rating == 1%>
+                <i class="star fas fa-star"></i>
+              <% elsif review.rating == 2 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+              <% elsif review.rating == 3 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+               <% elsif review.rating == 4 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+               <% elsif review.rating == 5 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+              <%end%>
+              <small><em><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+            </div>
+            <div>
+              <%= review.content.capitalize%> 
+            </div>
+          </div>
+        <%end%>
+      </div>
+      <div class="form-pokemon-review">
+        <h3>Add your review on <%=@pokemon.name%> </h3>
+        <%= simple_form_for [@pokemon, @review_pok] do |f| %>
+          <%= f.input :content, placeholder: 'Add your review here...', :required => true %>
+          <%= f.input :rating, collection: (1..5).to_a, label: "Rate #{@pokemon.name}" %>
+          <%= f.submit "Create Review", class: "btn btn-primary submit-review" %>
+        <%end%>
+      </div>
+    </div>
+
+    <div class="d-none">
+      <%@pokemon.rents.each do |rent|%>
+        <div class="date-rent-pok">
+          <%= rent.start_time%> <%= rent.end_time%>
+        </div>
+      <%end%>
+  </body>
+</html>

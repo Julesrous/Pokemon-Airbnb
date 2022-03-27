@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_09_211336) do
+ActiveRecord::Schema.define(version: 2022_03_25_182554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,31 @@ ActiveRecord::Schema.define(version: 2022_03_09_211336) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "chatroom_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "chatroom_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chatroom_id"], name: "index_participations_on_chatroom_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
     t.string "nature"
@@ -52,19 +77,61 @@ ActiveRecord::Schema.define(version: 2022_03_09_211336) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "price_per_week"
     t.index ["user_id"], name: "index_pokemons_on_user_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.string "content"
+    t.bigint "pokemon_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pokemon_id"], name: "index_ratings_on_pokemon_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "rents", force: :cascade do |t|
     t.date "start_time"
     t.date "end_time"
-    t.integer "price_per_week"
+    t.integer "total_price"
     t.bigint "user_id", null: false
     t.bigint "pokemon_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["pokemon_id"], name: "index_rents_on_pokemon_id"
     t.index ["user_id"], name: "index_rents_on_user_id"
+  end
+
+  create_table "review_pokemons", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "pokemon_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["pokemon_id"], name: "index_review_pokemons_on_pokemon_id"
+    t.index ["user_id"], name: "index_review_pokemons_on_user_id"
+  end
+
+  create_table "review_users", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_review_users_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "rating"
+    t.bigint "pokemon_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pokemon_id"], name: "index_reviews_on_pokemon_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -78,13 +145,27 @@ ActiveRecord::Schema.define(version: 2022_03_09_211336) do
     t.string "first_name"
     t.string "last_name"
     t.string "region"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participations", "chatrooms"
+  add_foreign_key "participations", "users"
   add_foreign_key "pokemons", "users"
+  add_foreign_key "ratings", "pokemons"
+  add_foreign_key "ratings", "users"
   add_foreign_key "rents", "pokemons"
   add_foreign_key "rents", "users"
+  add_foreign_key "review_pokemons", "pokemons"
+  add_foreign_key "review_pokemons", "users"
+  add_foreign_key "review_users", "users"
+  add_foreign_key "reviews", "pokemons"
+  add_foreign_key "reviews", "users"
 end

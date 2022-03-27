@@ -71,3 +71,7 @@ gem 'cloudinary', '~> 1.16.0'
 gem 'pundit'
 
 gem "geocoder"
+
+gem 'pg_search', '~> 2.3.0'
+
+gem "turbolinks_render"

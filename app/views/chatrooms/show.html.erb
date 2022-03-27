@@ -1,0 +1,29 @@
+<div class="container chatroom"
+    data-controller="chatroom-subscription"
+    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+  >
+  <%user1 = nil%>
+  <%user2 = nil%>
+  <%@chatroom.users.each do |user|%>
+    <%if user == current_user%>
+     <%user1= user%>
+   <%else%>
+      <%user2= user%>
+    <%end%>
+  <%end%>
+  <h1>#<%= user2.first_name %></h1>
+
+<div class="messages" data-chatroom-subscription-target="messages">
+  <% @chatroom.messages.each do |message| %>
+    <%= render "messages/message", message: message %>
+  <% end %>
+</div>
+
+  <%= simple_form_for [@chatroom, @message],
+    remote: true,
+    html: {data: {action: "ajax:success->chatroom-subscription#resetForm"}, class: "d-flex" } do |f|
+  %>
+    <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.name}", wrapper_html: {class: "flex-grow-1"} %>
+    <%= f.submit "Send", class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -3,7 +3,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
   <body>
@@ -17,8 +16,9 @@
                 <%= cl_image_tag current_user.photo.key, height: 50, width: 50, crop: :fill, :radius=>"max" if current_user.photo.attached? %>
               </a>
               <div class="dropdown-menu">
-              <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
+                <%= link_to "Message", chatrooms_path, class: "dropdown-item" %>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </div>
             </div>
           <% else %>

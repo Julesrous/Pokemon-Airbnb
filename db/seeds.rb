@@ -6,38 +6,40 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "Cleaning database..."
+Rent.destroy_all
 User.destroy_all
 Pokemon.destroy_all
+Chatroom.destroy_all
 
-pierre = User.new(email: "pierre@pokemon.com", first_name: "Pierre", last_name: "Roche", region: "Kanto", password: "123456")
+pierre = User.new(email: "pierre@pokemon.com", first_name: "Pierre", last_name: "Roche", region: "Kanto", address: "Tour Eiffel", password: "123456")
 pierre.photo.attach(io: File.open('app/assets/images/pierre.jpg'), filename: 'pierre.jpg')
 pierre.save
 
-ondine = User.new(email: "ondine@pokemon.com", first_name: "Ondine", last_name: "Eau", region: "Kanto", password: "123456")
+ondine = User.new(email: "ondine@pokemon.com", first_name: "Ondine", last_name: "Eau", region: "Kanto", address: "Boulevard Saint Germain", password: "123456")
 ondine.photo.attach(io: File.open('app/assets/images/ondine.jpg'), filename: 'ondine.jpg')
 ondine.save
 
-aaron = User.new(email: "aaron@pokemon.com", first_name: "Aaron", last_name: "Insecte", region: "Sinnoh", password: "123456")
+aaron = User.new(email: "aaron@pokemon.com", first_name: "Aaron", last_name: "Insecte", region: "Sinnoh", address: "Rue d'Ankara", password: "123456")
 aaron.photo.attach(io: File.open('app/assets/images/Aaron.png'), filename: 'Aaron.png')
 aaron.save
 
-alizé = User.new(email: "alizé@pokemon.com", first_name: "Alizé", last_name: "Vol", region: "Hoenne", password: "123456")
+alizé = User.new(email: "alizé@pokemon.com", first_name: "Alizé", last_name: "Vol", region: "Hoenne", address: "Avenue Paul Doumer", password: "123456")
 alizé.photo.attach(io: File.open('app/assets/images/Alizé.png'), filename: 'Alizé.png')
 alizé.save
 
-flora = User.new(email: "flora@pokemon.com", first_name: "Flora", last_name: "Hoenne", region: "Hoenne", password: "123456")
+flora = User.new(email: "flora@pokemon.com", first_name: "Flora", last_name: "Hoenne", region: "Hoenne", address: "Rue Raynouard", password: "123456")
 flora.photo.attach(io: File.open('app/assets/images/Flora.jpg'), filename: 'Flora.jpg')
 flora.save
 
-cynthia = User.new(email: "cynthia@pokemon.com", first_name: "Cynthia", last_name: "Ligue", region: "Sinnoh", password: "123456")
+cynthia = User.new(email: "cynthia@pokemon.com", first_name: "Cynthia", last_name: "Ligue", region: "Sinnoh", address: "Arc de Triomphe", password: "123456")
 cynthia.photo.attach(io: File.open('app/assets/images/Cynthia.jpg'), filename: 'Cynthia.jpg')
 cynthia.save
 
-jasmine = User.new(email: "jasmine@pokemon.com", first_name: "Jasmine", last_name: "Acier", region: "Johto", password: "123456")
+jasmine = User.new(email: "jasmine@pokemon.com", first_name: "Jasmine", last_name: "Acier", region: "Johto", address: "Rue des Saint-Pères", password: "123456")
 jasmine.photo.attach(io: File.open('app/assets/images/Jasmine.jpg'), filename: 'Jasmine.jpg')
 jasmine.save
 
-norman = User.new(email: "norman@pokemon.com", first_name: "Norman", last_name: "Normal", region: "Hoenne", password: "123456")
+norman = User.new(email: "norman@pokemon.com", first_name: "Norman", last_name: "Normal", region: "Hoenne", address: "Avenue Victor Hugo", password: "123456")
 norman.photo.attach(io: File.open('app/assets/images/Norman.png'), filename: 'Norman.png')
 norman.save
 
@@ -46,54 +48,56 @@ onix.photo.attach(io: File.open('app/assets/images/Onix.png'), filename: '0nix.p
 onix.user = pierre
 onix.save
 
-stari = Pokemon.new(name: "Stari", nature: "Timide", power: "Eau", level: "20", description: "Le plus mignon des staris au monde! Vous l'adorerez!")
+stari = Pokemon.new(name: "Stari", nature: "Timide", power: "Eau", level: "20", price_per_week: "40", description: "Le plus mignon des staris au monde! Vous l'adorerez!")
 stari.photo.attach(io: File.open('app/assets/images/Stari.png'), filename: 'Stari.png')
 stari.user = ondine
 stari.save
 
-altaria = Pokemon.new(name: "Altaria", nature: "Jovial", power: "Vol", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+altaria = Pokemon.new(name: "Altaria", nature: "Jovial", power: "Vol", level: "50", price_per_week: "60", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 altaria.photo.attach(io: File.open('app/assets/images/Altaria.png'), filename: 'Altaria.png')
 altaria.user = alizé
 altaria.save
 
-carchacrok = Pokemon.new(name: "Carchacrok", nature: "Foufou", power: "Dragon", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+carchacrok = Pokemon.new(name: "Carchacrok", nature: "Foufou", power: "Dragon", level: "50", price_per_week: "100", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 carchacrok.photo.attach(io: File.open('app/assets/images/Carchacrok.png'), filename: 'Carchacrok.png')
 carchacrok.user = cynthia
 carchacrok.save
 
-charmillon = Pokemon.new(name: "Charmillon", nature: "Discret", power: "Insecte", level: "20", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+charmillon = Pokemon.new(name: "Charmillon", nature: "Discret", power: "Insecte", level: "20", price_per_week: "40", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 charmillon.photo.attach(io: File.open('app/assets/images/Charmillon.png'), filename: 'Charmillon.png')
 charmillon.user = flora
 charmillon.save
 
-galifeu = Pokemon.new(name: "Galifeu", nature: "Malin", power: "Feu", level: "30", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+galifeu = Pokemon.new(name: "Galifeu", nature: "Malin", power: "Feu", level: "30", price_per_week: "55", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 galifeu.photo.attach(io: File.open('app/assets/images/Galifeu.png'), filename: 'Galifeu.png')
 galifeu.user = flora
 galifeu.save
 
-drascore = Pokemon.new(name: "Drascore", nature: "Sérieux", power: "Insecte", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+drascore = Pokemon.new(name: "Drascore", nature: "Sérieux", power: "Insecte", level: "50", price_per_week: "90", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 drascore.photo.attach(io: File.open('app/assets/images/Drascore.png'), filename: 'Drascore.png')
 drascore.user = aaron
 drascore.save
 
-lucario = Pokemon.new(name: "Lucario", nature: "Solo", power: "Combat", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+lucario = Pokemon.new(name: "Lucario", nature: "Solo", power: "Combat", level: "50", price_per_week: "70", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 lucario.photo.attach(io: File.open('app/assets/images/Lucario.png'), filename: 'Lucario.png')
 lucario.user = cynthia
 lucario.save
 
-magnéti = Pokemon.new(name: "Magnéti", nature: "Pressé", power: "Électrique", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+magnéti = Pokemon.new(name: "Magnéti", nature: "Pressé", power: "Électrique", level: "50", price_per_week: "25", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 magnéti.photo.attach(io: File.open('app/assets/images/Magnéti.png'), filename: 'Magnéti.png')
 magnéti.user = jasmine
 magnéti.save
 
-monaflemit = Pokemon.new(name: "Monaflemit", nature: "Relax", power: "Normal", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+monaflemit = Pokemon.new(name: "Monaflemit", nature: "Relax", power: "Normal", level: "50", price_per_week: "80", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 monaflemit.photo.attach(io: File.open('app/assets/images/Monaflemit.png'), filename: 'Monaflemitpng')
 monaflemit.user = norman
 monaflemit.save
 
-stelix = Pokemon.new(name: "Stelix", nature: "Gentil", power: "Acier", level: "50", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
+stelix = Pokemon.new(name: "Stelix", nature: "Gentil", power: "Acier", level: "50", price_per_week: "85", description: "Un incroyable pokémon, très puissant, qui adore les calins!")
 stelix.photo.attach(io: File.open('app/assets/images/Stelix.png'), filename: 'Stelix.png')
 stelix.user = jasmine
 stelix.save
+
+chatroom = Chatroom.create(name: "general")
 
 puts "Finished!"
