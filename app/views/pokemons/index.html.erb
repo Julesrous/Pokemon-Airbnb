@@ -6,12 +6,16 @@
   </head>
   <body>
     <div class="index-container">
-      <%recent_pok = @pokemons[0]%>
+      <%recent_pok = nil%>
       <%if @pokemons.any?%>
         <%@pokemons.each do |pokemon|%>
           <%if pokemon.user != current_user%>
-            <%if recent_pok.created_at < pokemon.created_at%>      
+            <%if recent_pok.nil?%>
               <%recent_pok = pokemon%>
+            <%else%>
+              <%if recent_pok.created_at < pokemon.created_at%>      
+                <%recent_pok = pokemon%>
+              <%end%>
             <%end%>
           <%end%>
         <%end%>
@@ -124,7 +128,7 @@
       <div class="main-title">
         <h1>All pokemons avalaible</h1>
           <% if policy(Pokemon).create? %>
-            <%=link_to new_pokemon_path do%>
+            <%=link_to new_pokemon_path, data: { turbolinks: false } do%>
               <button type="button" class="btn btn-primary btn-add-poke"><i class="fas fa-plus"></i> Add your pokemon</button>
             <%end%>
           <% end %>

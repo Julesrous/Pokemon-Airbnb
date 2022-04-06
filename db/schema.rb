@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_25_182554) do
+ActiveRecord::Schema.define(version: 2022_04_02_230652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 2022_03_25_182554) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
+  create_table "read_marks", id: :serial, force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.integer "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader"
+  end
+
   create_table "rents", force: :cascade do |t|
     t.date "start_time"
     t.date "end_time"
@@ -117,10 +128,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_182554) do
   create_table "review_users", force: :cascade do |t|
     t.string "content"
     t.integer "rating"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_review_users_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -132,6 +141,15 @@ ActiveRecord::Schema.define(version: 2022_03_25_182554) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["pokemon_id"], name: "index_reviews_on_pokemon_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "user_review_participations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "review_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_user_id"], name: "index_user_review_participations_on_review_user_id"
+    t.index ["user_id"], name: "index_user_review_participations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -165,7 +183,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_182554) do
   add_foreign_key "rents", "users"
   add_foreign_key "review_pokemons", "pokemons"
   add_foreign_key "review_pokemons", "users"
-  add_foreign_key "review_users", "users"
   add_foreign_key "reviews", "pokemons"
   add_foreign_key "reviews", "users"
+  add_foreign_key "user_review_participations", "review_users"
+  add_foreign_key "user_review_participations", "users"
 end

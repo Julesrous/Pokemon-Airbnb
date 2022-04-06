@@ -23,4 +23,8 @@ import { initStarRating } from '../plugins/init_star_rating';
 
 initStarRating();
 
+import { previewImageOnFileSelect } from "../components/photo_preview";
+
+previewImageOnFileSelect();
+
 console.log("Hello from app/javascript/packs/application.js!");

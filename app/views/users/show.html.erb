@@ -1,1 +1,80 @@
-<h1><%=@user.first_name%><%=@user.last_name%></h1>
+<div class="user-show-container">
+  <div class="carte-dresseur-3">
+    <div class="carte-dresseur-2">
+      <div class="carte-dresseur">
+        <div class="carte-dresseur-title">
+          <%= image_tag "pokeballcarte.png", width: 40, height: 40, class: 'rounded-circle'%>
+          <h1>Carte de dresseur</h1>
+          <%= image_tag "pokeballcarte.png", width: 40, height: 40, class: 'rounded-circle'%>
+        </div>
+        <div class="user-info-photo">
+          <div>
+            <div class="info-details-user">
+              <p>N° ID</p> <div class="info-detail-user"><%=@user.id%></div>
+            </div>
+            <div class="info-details-user">
+              <p>Nom</p> <div class="info-detail-user"><%=@user.last_name.upcase%></div>
+            </div>
+            <div class="info-details-user">
+              <p>Prénom</p> <div class="info-detail-user"><%=@user.first_name.capitalize%></div>
+            </div>
+            <div class="info-details-user">
+              <p>Région</p> <div class="info-detail-user"><%=@user.region%></div>
+            </div>
+            <div class="info-details-user">
+              <p>Address</p> <div class="info-detail-user"><%=@user.address%></div>
+            </div>
+          </div>
+          <div>
+            <%=cl_image_tag @user.photo.key, height: 200, width: 200, class: 'rounded-circle' if @user.photo.attached? %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2>Pokemons appartenant à <%=@user.first_name%></h2>
+    <%= render 'listapp'%>
+  <h2>Pokemons loués par <%=@user.first_name%></h2>
+    <%= render 'listlouer'%>
+  <div class="pokemon-reviews">
+    <div class="pokemon-reviews-info">
+      <h2>Reviews</h2>
+      <% @user.user_review_participations.each do |participation|%>
+        <% if @user == participation.review_user.users[1] %>
+          <div class="pokemon-review">
+            <div>
+              <strong><%=participation.review_user.users[0].first_name%></strong>
+            </div>
+            <div>
+              <% if participation.review_user.rating == 1%>
+                <i class="star fas fa-star"></i>
+              <% elsif  participation.review_user.rating == 2 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+              <% elsif participation.review_user.rating == 3 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+                <% elsif participation.review_user.rating == 4 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+                <% elsif participation.review_user.rating == 5 %>
+                <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i> <i class="star fas fa-star"></i>
+              <%end%>
+              <small><em><%= distance_of_time_in_words_to_now(participation.review_user.created_at) %> ago</em></small>
+            </div>
+            <div>
+              <%= participation.review_user.content.capitalize%> 
+            </div>
+          </div>
+        <%end%>
+      <%end%>
+    </div>
+    <%if @user != current_user%>
+      <div class="form-pokemon-review">
+        <h3>Add your review on <%=@user.first_name%> </h3>
+        <%= simple_form_for [@user, @review_user] do |f| %>
+          <%= f.input :content, placeholder: 'Add your review here...', :required => true %>
+          <%= f.input :rating, collection: (1..5).to_a, label: "Rate #{@user.first_name}" %>
+          <%= f.submit "Create Review", class: "btn btn-primary submit-review" %>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+</div>

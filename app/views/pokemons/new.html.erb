@@ -1,11 +1,28 @@
-<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-<%= simple_form_for(@pokemon) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :nature %>
-  <%= f.input :power %>
-  <%= f.input :level %>
-  <%= f.input :photo, as: :file %>
-  <%= f.input :price_per_week %>
-  <%= f.input :description %>
-  <%= f.submit %>
-<% end %>
+<div class="new-pokemon-container">
+    <h1>Create your new pokemon</h1>
+    <%= simple_form_for(@pokemon) do |f| %>
+      <div class="new-pokemon-info">
+        <div class="new-pok-name"><%= f.input :name, placeholder: 'Carapuce' %></div>
+        <div class="label-flex-input new-pok-price">
+          <h3>Price per week:</h3> 
+          <%= f.input :price_per_week, placeholder: 'XXX' %>
+          <h3>€</h3> 
+        </div>
+        <div class="pokemon-photo-details">
+          <div class="new-pok-photo">
+            <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
+            <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+          </div>
+          <div class="new-pok-details">
+            <div class="label-flex-input new-pok-detail"><p>Nature:</p> <%= f.input :nature, placeholder: 'Foufou' %></div>
+            <div class="label-flex-input new-pok-detail"><p>Power:</p> <%= f.input :power, placeholder: 'Eau' %></div>
+            <div class="label-flex-input new-pok-detail"><p>Level:</p> <%= f.input :level, placeholder: '20' %></div>
+            <div class="label-flex-input new-pok-detail"><p> <i class="fas fa-quote-left"></i></p> <%= f.input :description, placeholder: 'Très fidèle!' %></div>
+          </div>
+        </div>
+        <div class="button-create">
+          <%= f.button :submit%>
+        </div>
+      </div>
+    <% end %>
+</div>

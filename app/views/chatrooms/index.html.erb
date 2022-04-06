@@ -1,14 +1,48 @@
-<%@chatrooms_user.each do |chatroom|%>
-  <div>
-    <%user1 = nil%>
-    <%user2 = nil%>
-    <%chatroom.users.each do |user|%>
-      <%if user == current_user%>
-        <%user1= user%>
-      <%else%>
-        <%user2= user%>
+<div class="container-chatroom-index">
+  <h1>Bienvenue sur votre boîte messages <%=current_user.first_name%> <i class="fas fa-envelope"></i></h1>
+  <%chatroom_order_with_time = @chatrooms_user.sort_by {|chatroom| chatroom.messages.last.created_at}.reverse%>
+  <%chatroom_order_with_time.each do |chatroom|%>
+    <div>
+      <%user1 = nil%>
+      <%user2 = nil%>
+      <%chatroom.users.each do |user|%>
+        <%if user == current_user%>
+          <%user1= user%>
+        <%else%>
+          <%user2= user%>
+        <%end%>
       <%end%>
-    <%end%>
-    <%=link_to "Discussion with #{user2.first_name}", chatroom_path(chatroom)%>
-  <div>
-<%end%>
+      <%if chatroom == chatroom_order_with_time.first%>
+        <%=link_to chatroom_path(chatroom), data: { turbolinks: false } do %>
+          <div class="user-photo-info first-chat">
+            <%=cl_image_tag user2.photo.key, height: 70, width: 70, class: "avatar" if user2.photo.attached? %>
+            <div class="user-chat-details">
+              <div class="user-chat-firstname"><%=user2.first_name%></div>
+              <%if chatroom.messages.last.unread?(current_user)%>
+                <div class="user-chat-content-unread"> <strong><%=chatroom.messages.last.content%></strong></div>
+              <%else%>
+                <div class="user-chat-content"><%=chatroom.messages.last.content%></div>
+              <%end%>
+              <div class="user-chat-date"><%=chatroom.messages.last.created_at.strftime('%R %a %d %b %Y')%></div>
+            </div>
+          </div>
+        <%end%>
+      <%else%>
+          <%=link_to chatroom_path(chatroom), data: { turbolinks: false } do %>
+          <div class="user-photo-info">
+            <%=cl_image_tag user2.photo.key, height: 70, width: 70, class: "avatar" if user2.photo.attached? %>
+            <div class="user-chat-details">
+              <div class="user-chat-firstname"><%=user2.first_name%></div>
+              <%if chatroom.messages.last.unread?(current_user)%>
+                <div class="user-chat-content-unread"> <strong><%=chatroom.messages.last.content%></strong></div>
+              <%else%>
+                <div class="user-chat-content"><%=chatroom.messages.last.content%></div>
+              <%end%>
+              <div class="user-chat-date"><%=chatroom.messages.last.created_at.strftime('%R %a %d %b %Y')%></div>
+            </div>
+          </div>
+        <%end%>
+      <%end%>
+    <div>
+  <%end%>
+</div>

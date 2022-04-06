@@ -18,7 +18,7 @@
             <p> Power: <%=@pokemon.power%></p>
             <p> Level: <%=@pokemon.level%></p>
             <p> <i class="fas fa-quote-left"></i> <%=@pokemon.description%></p>
-            <%= link_to user_path(@pokemon.user) do %>
+            <%= link_to user_path(@pokemon.user), data: { turbolinks: false } do %>
               <%=cl_image_tag @pokemon.user.photo.key, height: 50, width: 50, class: "avatar" if @pokemon.user.photo.attached? %>
             <%end%>
           </div>
@@ -33,6 +33,12 @@
             <%else%>
               <%=link_to  "Contact #{@pokemon.user.first_name}", chatroom_path(@chatroomCurrentUser), class: "btn btn-primary"%>
             <%end%>
+          <%else%>
+            <%= link_to "Delete #{@pokemon.name}",
+              pokemon_path(@pokemon),
+              method: :delete,
+              class: "delete-pokemon-link",
+              data: { confirm: "Are you sure?" } %>
           <%end%>
         </div>
       </div>

@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     @message.user = current_user
     authorize @message
     if @message.save
+      @message.mark_as_read! for: current_user
       ChatroomsChannel.broadcast_to(
         @chatroom,
         render_to_string(partial: "message", locals: {message: @message})

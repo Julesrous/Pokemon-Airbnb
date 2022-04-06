@@ -1,0 +1,61 @@
+.user-show-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .carte-dresseur-3{
+    border: solid;
+    border-color: #e8df97;
+    border-width: 15px;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  .carte-dresseur-2{
+    border: solid;
+    border-color: #707070;
+    border-width: 5px;
+    border-radius: 10px;
+  }
+  .carte-dresseur{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(#68a0e0, #70b8e7);
+    width: 800px;
+    align-items: center;
+    border: solid;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 10px;
+    .carte-dresseur-title{
+      display: flex;
+      .rounded-circle{
+        margin: 2px;
+      }
+    }
+    .user-info-photo{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .info-details-user{
+      display: flex;
+      margin: 5px;
+      background-color: #a0d0f0;
+      border-radius: 5px;
+      padding-left: 2px;
+      font-size: 18px;
+    }
+    p{
+      margin-right: 80px;
+      width: 50px;
+      margin-bottom: 0px;
+    }
+    .info-detail-user{
+      width: 250px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .review_user_rating{
+    margin-bottom: 20px;
+  }
+}

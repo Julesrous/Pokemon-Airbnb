@@ -1,0 +1,36 @@
+.login-page{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://cdn.ravensburger.de/images/produktseiten/1024/15166_1.jpg");
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+
+.login-info{
+  background-color: white;
+  width: 300px;
+  padding: 30px;
+  border-radius: 20px;
+  .btn{
+    background-color: #ffcb03;
+    border-radius: 5px;
+    border: none;
+    color: white;
+  }
+  .btn:hover{
+    background-color: #e8b500;
+  }
+  .form-actions{
+    display: flex;
+    justify-content: center;
+    margin: 3px;
+  }
+
+  a{
+    color: #106dae;
+  }
+  a:hover{
+    color: #0b5282;
+  }
+}

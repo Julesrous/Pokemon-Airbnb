@@ -26,4 +26,9 @@
     <%= f.input :content, label: false, placeholder: "Message ##{@chatroom.name}", wrapper_html: {class: "flex-grow-1"} %>
     <%= f.submit "Send", class: "btn btn-primary" %>
   <% end %>
+  
+  <%@chatroom.messages.each do |message|%>
+    <%message.mark_as_read! for: current_user%>
+  <%end%>
 </div>
+v
